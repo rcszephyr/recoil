@@ -18,3 +18,6 @@ HWID Lock.
 
 # Issues:
 High CPU use.
+
+# Status
+Undetected
