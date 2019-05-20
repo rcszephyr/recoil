@@ -43,6 +43,7 @@ void recoil()
 		int shakerNum = rand() % 3;
 		while (GetAsyncKeyState(1) & 0x8000 && (GetAsyncKeyState(2) & 0x8000 && bRecoil))
 		{
+			Sleep(1);
 			if (bAk == 1)
 
 			{
@@ -281,6 +282,7 @@ void keyhandler()
 {
 	for (;;)
 	{
+		Sleep(1);
 		if (GetAsyncKeyState(VK_F2) < 0) {
 			Beep(650, 500);
 			bRecoil = !bRecoil;
