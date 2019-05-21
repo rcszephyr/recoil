@@ -17,7 +17,7 @@ Python.
 HWID Lock.
 
 # Issues:
-High CPU use.
+Issues? no issues lmao.
 
 # Status
 Undetected
