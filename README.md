@@ -1,3 +1,6 @@
+# May be detected, use at your own risk!
+# I've seen a lot of threads in UC, like: [Release] Rust Recoil, this is the source that most of them use!
+
 # Rust-Recoil
 Rust Recoil Script maded on C++
 
