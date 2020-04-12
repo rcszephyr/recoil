@@ -25,4 +25,4 @@ Issues? no issues lmao.
 # Status
 Undetected
 # How to use
-Set game sensitivity 0.2 and dpi 600 or higher if you want.
+Fov 90 | game sensitivity 0.2 | any dpi setting
