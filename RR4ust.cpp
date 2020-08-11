@@ -1,10 +1,9 @@
 #include <Windows.h>
 #include <iostream>
+#include <thread>
 #include "Patterns.h"
 
 using namespace std;
-
-static bool HWID = CheckLicense();
 
 bool bRecoil = false;
 bool bAk = false;
@@ -43,7 +42,7 @@ void recoil()
 		int shakerNum = rand() % 3;
 		while (GetAsyncKeyState(1) & 0x8000 && (GetAsyncKeyState(2) & 0x8000 && bRecoil))
 		{
-			Sleep(1);
+			this_thread::sleep_for(1ms);
 			if (bAk == 1)
 
 			{
@@ -450,57 +449,31 @@ void keyhandler()
 			Sleep(300);
 		}
 	}
-	Sleep(300); //Reduce CPU usage
-}
-
-ATOM RegMyWindowClass(HINSTANCE, LPCTSTR);
-void ToClipboard(const char* text)
-{
-	if (OpenClipboard(0))
-	{
-		EmptyClipboard();
-		char* clip_data = (char*)(GlobalAlloc(GMEM_FIXED, MAX_PATH));
-		lstrcpy(clip_data, text);
-		SetClipboardData(CF_TEXT, (HANDLE)(clip_data));
-		LCID* lcid = (DWORD*)(GlobalAlloc(GMEM_FIXED, sizeof(DWORD)));
-		*lcid = MAKELCID(MAKELANGID(LANG_RUSSIAN, SUBLANG_NEUTRAL), SORT_DEFAULT);
-		SetClipboardData(CF_LOCALE, (HANDLE)(lcid));
-		CloseClipboard();
-	}
+	this_thread::sleep_for(15ms);
 }
 
 int main()
 {
 	SetConsoleTitle("Rust Script");
-	/*if (HWID) {*/
-		cout << "Hotkeys Include" << "\n";
-		cout << "F2 = On/Off" << "\n";
-		cout << "AK47 = Numpad 0" << "\n";
-		cout << "LR = Numpad 1" << "\n";
-		cout << "M249 = Numpad 2" << "\n";
-		cout << "Semi Pistol P250 = Numpad 3" << "\n";
-		cout << "M92 Pistol = Numpad 4" << "\n";
-		cout << "Semi Automatic Rifle = Numpad 5" << "\n";
-		cout << "Custom SMG / Tommy Gun = Numpad 6" << "\n";
-		cout << "Mp5 = Numpad 7" << "\n";
-		cout << "Revolver = Numpad 8" << "\n";
-		cout << "Python = Numpad 9" << "\n";
-		cout << "\n";
-		CreateThread(0, 0, (LPTHREAD_START_ROUTINE)recoil, 0, 0, 0);
-		CreateThread(0, 0, (LPTHREAD_START_ROUTINE)keyhandler, 0, 0, 0);
-		for (;;) {
-			Sleep(300); //Reduce CPU usage
-		}
-	/*}
-	else
-	{
-		int result;
-		result = MessageBox(NULL,
-			"Not allowed.\nClick OK to copy your HWID", "Rust Script", MB_OK | MB_ICONINFORMATION);
-		if (result == IDOK) {
-			ToClipboard(GetSerial().c_str());
-		}
-	}*/
-		//things that are commented just ignore it (or use it). HWID Lock.
+
+        cout << "Keybinds" << endl;
+	cout << "F2 = On/Off" << endl;
+	cout << "AK47 = Numpad 0" << endl;
+	cout << "LR = Numpad 1" << endl;
+	cout << "M249 = Numpad 2" << endl;
+	cout << "Semi Pistol P250 = Numpad 3" << endl;
+	cout << "M92 Pistol = Numpad 4" << endl;
+	cout << "Semi Automatic Rifle = Numpad 5" << endl;
+	cout << "Custom SMG / Tommy Gun = Numpad 6" << endl;
+	cout << "Mp5 = Numpad 7" << endl;
+	cout << "Revolver = Numpad 8" << endl;
+	cout << "Python = Numpad 9" << endl;
+
+	thread(recoil).detach();
+	thread(keyhandler).detach();
+	
+	
+	for (;;)
+	   this_thread::sleep_for(15ms);
 	return 0;
 }
