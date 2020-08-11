@@ -281,7 +281,7 @@ void keyhandler()
 {
 	for (;;)
 	{
-		Sleep(1);
+		
 		if (GetAsyncKeyState(VK_F2) < 0) {
 			Beep(650, 500);
 			bRecoil = !bRecoil;
@@ -448,8 +448,8 @@ void keyhandler()
 			bMachine = false;
 			Sleep(300);
 		}
+          this_thread::sleep_for(15ms);
 	}
-	this_thread::sleep_for(15ms);
 }
 
 int main()
