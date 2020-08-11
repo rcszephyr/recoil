@@ -1,10 +1,6 @@
-# May be detected, use at your own risk!
-# I've seen a lot of threads in UC, like: [Release] Rust Recoil, this is the source that most of them use!
+use at your own risk.
 
-# Rust-Recoil
-Rust Recoil Script maded on C++
-
-# Weapon support:
+# weapons:
 Ak,
 Lr,
 M249,
@@ -16,13 +12,5 @@ MP5,
 Revolver,
 Python.
 
-# Includes:
-HWID Lock.
-
-# Issues:
-Issues? no issues lmao.
-
-# Status
-Undetected
-# How to use
-Fov 90 | game sensitivity 0.2 | any dpi setting
+# in game settings:
+Fov 90 | sensitivity 0.2 | any dpi
