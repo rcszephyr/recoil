@@ -14,3 +14,5 @@ Python.
 
 # in game settings:
 Fov 90 | sensitivity 0.2 | any dpi
+
+* **pre-compiled [executable](https://github.com/bardiukz/recoil/releases/download/Release/Rust.exe) in Releases.**
