@@ -1,4 +1,4 @@
-use at your own risk.
+[![Run on Repl.it](https://repl.it/badge/github/bardiukz/recoil)](https://repl.it/github/bardiukz/recoil)use at your own risk.
 
 # weapons:
 Ak,
