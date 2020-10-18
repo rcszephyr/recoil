@@ -1,3 +1,8 @@
+/***************************
+*	Contributors: OMGPROD  *
+*    Thank's to Bardiukz   *
+****************************/
+
 #include <Windows.h>
 #include <iostream>
 #include <thread>
@@ -5,20 +10,22 @@
 
 using namespace std;
 
-bool bRecoil = false;
-bool bAk = false;
-bool bSemiR = false;
-bool bPy = false;
-bool bSemiP = false;
-bool bRevo = false;
-bool bM9Pistol = false;
-bool bTommy = false;
-bool bCust = false;
-bool bMp5 = false;
-bool bMachine = false;
-bool bEnabled = false;
-bool bLr = false;
-bool bTurnedOn = false;
+bool boolRec = false;
+bool boolAk = false;
+bool boolSAR = false;
+bool boolPy = false;
+bool boolSemiP = false;
+bool boolRevo = false;
+bool boolM9 = false;
+bool boolTommy = false;
+bool boolCustom = false;
+bool boolMp5 = false;
+bool boolMachine = false;
+bool boolEnabled = false;
+bool boolLR = false;
+bool boolX8 = false;
+bool boolX16 = false;
+bool boolON = false;
 
 
 void mouse_move(int x, int y)
@@ -33,31 +40,30 @@ void mouse_move(int x, int y)
 	SendInput(1, &input, sizeof(input));
 }
 
-
-void recoil()
+void rec()
 {
 	for (;;)
 	{
 		int shotTiming = 0;
-		int shakerNum = rand() % 3;
-		while (GetAsyncKeyState(1) & 0x8000 && (GetAsyncKeyState(2) & 0x8000 && bRecoil))
+		int shakerNum = rand() % 2;
+		while (GetAsyncKeyState(1) & 0x8000 && (GetAsyncKeyState(2) & 0x8000 && boolRec))
 		{
 			this_thread::sleep_for(1ms);
-			if (bAk == 1)
 
+			if (boolAk == 1)
 			{
 
 				int fireRate = 134;
 
 				if (shotTiming < 30)
 				{
-					int valueX = (AssualtRifle::recoilTableX[shotTiming] * 0.48) + shakerNum;
+					int valueX = (AssualtRifle::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+					int valueY = (AssualtRifle::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+
 					int smoothingX = valueX / 5;
-					int valueY = (AssualtRifle::recoilTableY[shotTiming] * 0.48) + shakerNum;
 					int smoothingY = valueY / 5;
+
 					Sleep(3);
-
-
 					for (int i = 0; i < 5; i++)
 					{
 						mouse_move(valueX, valueY);
@@ -67,20 +73,17 @@ void recoil()
 				}
 			}
 
-			if (bSemiR == 1)
-
-			{
-
+			if (boolSAR == 1) {
 				int fireRate = 175;
 				if (shotTiming < 16)
 				{
-					int valueX = (SemiRifle::recoilTableX[shotTiming] * 0.48);
+					int valueX = (SemiRifle::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48));
+					int valueY = (SemiRifle::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+
 					int smoothingX = valueX / 5;
-					int valueY = (SemiRifle::recoilTableY[shotTiming] * 0.48) + shakerNum;
 					int smoothingY = valueY / 5;
+
 					Sleep(1);
-
-
 					for (int i = 0; i < 5; i++)
 					{
 						mouse_move(valueX, valueY);
@@ -90,20 +93,17 @@ void recoil()
 				}
 			}
 
-			if (bPy == 1)
-
-			{
-
+			if (boolPy == 1) {
 				int fireRate = 150;
 				if (shotTiming < 6)
 				{
-					int valueX = (Python::recoilTableX[shotTiming] * 0.48);
+					int valueX = (Python::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48));
+					int valueY = (Python::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+
 					int smoothingX = valueX / 5;
-					int valueY = (Python::recoilTableY[shotTiming] * 0.48) + shakerNum;
 					int smoothingY = valueY / 5;
+
 					Sleep(3);
-
-
 					for (int i = 0; i < 5; i++)
 					{
 						mouse_move(valueX, valueY);
@@ -113,20 +113,18 @@ void recoil()
 				}
 			}
 
-			if (bCust == 1)
-
-			{
+			if (boolCustom == 1) {
 
 				int fireRate = 100;
 				if (shotTiming < 24)
 				{
-					int valueX = (CustomSmg::recoilTableX[shotTiming] * 0.48);
+					int valueX = (CustomSmg::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48));
+					int valueY = (CustomSmg::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48));
+
 					int smoothingX = valueX / 5;
-					int valueY = (CustomSmg::recoilTableY[shotTiming] * 0.48);
 					int smoothingY = valueY / 5;
+
 					Sleep(3);
-
-
 					for (int i = 0; i < 5; i++)
 					{
 						mouse_move(valueX, valueY);
@@ -136,20 +134,17 @@ void recoil()
 				}
 			}
 
-			if (bMp5 == 1)
-
-			{
-
+			if (boolMp5 == 1) {
 				int fireRate = 98;
 				if (shotTiming < 30)
 				{
-					int valueX = (LaserSmg::recoilTableX[shotTiming] * 0.48) + shakerNum;
+					int valueX = (LaserSmg::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+					int valueY = (LaserSmg::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+
 					int smoothingX = valueX / 5;
-					int valueY = (LaserSmg::recoilTableY[shotTiming] * 0.48) + shakerNum;
 					int smoothingY = valueY / 5;
+
 					Sleep(3);
-
-
 					for (int i = 0; i < 5; i++)
 					{
 						mouse_move(valueX, valueY);
@@ -159,16 +154,14 @@ void recoil()
 				}
 			}
 
-			if (bMachine == 1)
-
-			{
-
+			if (boolMachine == 1) {
 				int fireRate = 120;
 				if (shotTiming < 100)
 				{
-					int valueX = (MachineGun::recoilTableX[shotTiming] * 0.48);
+					int valueX = (MachineGun::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48));
+					int valueY = (MachineGun::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+
 					int smoothingX = valueX / 5;
-					int valueY = (MachineGun::recoilTableY[shotTiming] * 0.48) + shakerNum;
 					int smoothingY = valueY / 5;
 					Sleep(3);
 
@@ -182,16 +175,14 @@ void recoil()
 				}
 			}
 
-			if (bRevo == 1)
-
-			{
-
+			if (boolRevo == 1) {
 				int fireRate = 175;
 				if (shotTiming < 8)
 				{
-					int valueX = (Revolver::recoilTableX[shotTiming] * 0.48);
+					int valueX = (Revolver::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48));
+					int valueY = (Revolver::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+
 					int smoothingX = valueX / 5;
-					int valueY = (Revolver::recoilTableY[shotTiming] * 0.48) + shakerNum;
 					int smoothingY = valueY / 5;
 					Sleep(3);
 
@@ -205,16 +196,14 @@ void recoil()
 				}
 			}
 
-			if (bM9Pistol == 1)
-
-			{
-
+			if (boolM9 == 1) {
 				int fireRate = 100;
 				if (shotTiming < 15)
 				{
-					int valueX = (PistolO::recoilTableX[shotTiming] * 0.48);
+					int valueX = (PistolO::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48));
+					int valueY = (PistolO::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+
 					int smoothingX = valueX / 5;
-					int valueY = (PistolO::recoilTableY[shotTiming] * 0.48) + shakerNum;
 					int smoothingY = valueY / 5;
 					Sleep(1);
 
@@ -228,16 +217,14 @@ void recoil()
 				}
 			}
 
-			if (bSemiP == 1)
-
-			{
-
+			if (boolSemiP == 1) {
 				int fireRate = 150;
 				if (shotTiming < 10)
 				{
-					int valueX = (SemiPistol::recoilTableX[shotTiming] * 0.48);
+					int valueX = (SemiPistol::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48));
+					int valueY = (SemiPistol::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+
 					int smoothingX = valueX / 5;
-					int valueY = (SemiPistol::recoilTableY[shotTiming] * 0.48) + shakerNum;
 					int smoothingY = valueY / 5;
 					Sleep(3);
 
@@ -250,20 +237,16 @@ void recoil()
 					shotTiming++;
 				}
 			}
-			if (bLr == 1)
-
-			{
-
+			if (boolLR == 1) {
 				int fireRate = 120;
 				if (shotTiming < 30)
 				{
-					int valueX = (LazerRifle::recoilTableX[shotTiming] * 0.48) + shakerNum;
+					int valueX = (LazerRifle::recoilTableX[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
+					int valueY = (LazerRifle::recoilTableY[shotTiming] * (boolX8 ? 2.0 : boolX16 ? 4.0 : 0.48)) + shakerNum;
 					int smoothingX = valueX / 5;
-					int valueY = (LazerRifle::recoilTableY[shotTiming] * 0.48) + shakerNum;
 					int smoothingY = valueY / 5;
+
 					Sleep(3);
-
-
 					for (int i = 0; i < 5; i++)
 					{
 						mouse_move(valueX, valueY);
@@ -276,204 +259,229 @@ void recoil()
 	}
 }
 
+int screen() {
+	system("cls");
+	cout << "-------------------------------------------" << endl;
+	cout << "| IMPORTANT : FOV = 90, Sensitivity = 0.2 |" << endl;
+	cout << "-------------------------------------------" << endl;
+	cout << "      ----------------------------       " << endl;
+	cout << "      | Numpad / | ACTIVATE = " << (boolON ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad + | ScopeX8  = " << (boolX8 ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad * | ScopeX16 = " << (boolX16 ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 0 | AK47     = " << (boolAk ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 1 | LR       = " << (boolLR ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 2 | M249     = " << (boolMachine ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 3 | P250     = " << (boolSemiP ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 4 | M92      = " << (boolM9 ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 5 | SAR      = " << (boolSAR ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 6 | SMG      = " << (boolCustom ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 7 | Mp5      = " << (boolMp5 ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 8 | Revo     = " << (boolRevo ? "ON " : "OFF") << "| " << endl;
+	cout << "      | Numpad 9 | Python   = " << (boolPy ? "ON " : "OFF") << "| " << endl;
+	cout << "      ----------------------------       " << endl;
+	return 0;
+}
 
-void keyhandler()
+
+void menu()
 {
 	for (;;)
 	{
-		
-		if (GetAsyncKeyState(VK_F2) < 0) {
+
+		if (GetAsyncKeyState(VK_DIVIDE) < 0) {
 			Beep(650, 500);
-			bRecoil = !bRecoil;
-			bTurnedOn = !bTurnedOn;
-			cout << "Program Enabled = " << bTurnedOn << "\n";
+			boolRec = !boolRec;
+			boolON = !boolON;
+			thread(screen).detach();
+			Sleep(300);
+		}
+		if (GetAsyncKeyState(VK_ADD) < 0) {
+			Beep(700, 500);
+			boolX8 = !boolX8;
+			boolX16 = false;
+			thread(screen).detach();
+			Sleep(300);
+		}
+		if (GetAsyncKeyState(VK_MULTIPLY) < 0) {
+			Beep(750, 500);
+			boolX16 = !boolX16;
+			boolX8 = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD0) < 0) {
 			Beep(325, 600);
-			bAk = !bAk;
-			bSemiR = false;
-			bPy = false;
-			bSemiP = false;
-			bRevo = false;
-			bM9Pistol = false;
-			bTommy = false;
-			bCust = false;
-			bMp5 = false;
-			bMachine = false;
-			bLr = false;
-			cout << "Ak Enabled" << "\n";
+			boolAk = !boolAk;
+			boolSAR = false;
+			boolPy = false;
+			boolSemiP = false;
+			boolRevo = false;
+			boolM9 = false;
+			boolTommy = false;
+			boolCustom = false;
+			boolMp5 = false;
+			boolMachine = false;
+			boolLR = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD5) < 0) {
 			Beep(360, 600);
-			bSemiR = !bSemiR;
-			cout << "Semi Enabled" << "\n";
-			bAk = false;
-			bPy = false;
-			bSemiP = false;
-			bRevo = false;
-			bM9Pistol = false;
-			bTommy = false;
-			bCust = false;
-			bMp5 = false;
-			bMachine = false;
-			bLr = false;
+			boolSAR = !boolSAR;
+			boolAk = false;
+			boolPy = false;
+			boolSemiP = false;
+			boolRevo = false;
+			boolM9 = false;
+			boolTommy = false;
+			boolCustom = false;
+			boolMp5 = false;
+			boolMachine = false;
+			boolLR = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD9) < 0) {
 			Beep(398, 600);
-			bPy = !bPy;
-			cout << "Python Enabled" << "\n";
-			bAk = false;
-			bSemiR = false;
-			bSemiP = false;
-			bRevo = false;
-			bM9Pistol = false;
-			bTommy = false;
-			bCust = false;
-			bMp5 = false;
-			bMachine = false;
-			bLr = false;
+			boolPy = !boolPy;
+			boolAk = false;
+			boolSAR = false;
+			boolSemiP = false;
+			boolRevo = false;
+			boolM9 = false;
+			boolTommy = false;
+			boolCustom = false;
+			boolMp5 = false;
+			boolMachine = false;
+			boolLR = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD3) < 0) {
 			Beep(423, 600);
-			bSemiP = !bSemiP;
-			cout << "Semi Pistol Enabled" << "\n";
-			bAk = false;
-			bPy = false;
-			bSemiR = false;
-			bRevo = false;
-			bM9Pistol = false;
-			bTommy = false;
-			bCust = false;
-			bMp5 = false;
-			bMachine = false;
-			bLr = false;
+			boolSemiP = !boolSemiP;
+			boolAk = false;
+			boolPy = false;
+			boolSAR = false;
+			boolRevo = false;
+			boolM9 = false;
+			boolTommy = false;
+			boolCustom = false;
+			boolMp5 = false;
+			boolMachine = false;
+			boolLR = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD6) < 0) {
 			Beep(466, 600);
-			bCust = !bCust;
-			cout << "Custom Smg Enabled" << "\n";
-			bAk = false;
-			bPy = false;
-			bSemiP = false;
-			bSemiR = false;
-			bRevo = false;
-			bM9Pistol = false;
-			bTommy = false;
-			bMp5 = false;
-			bMachine = false;
-			bLr = false;
+			boolCustom = !boolCustom;
+			boolAk = false;
+			boolPy = false;
+			boolSemiP = false;
+			boolSAR = false;
+			boolRevo = false;
+			boolM9 = false;
+			boolTommy = false;
+			boolMp5 = false;
+			boolMachine = false;
+			boolLR = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD2) < 0) {
 			Beep(488, 600);
-			bMachine = !bMachine;
-			cout << "M249 Enabled" << "\n";
-			bAk = false;
-			bSemiR = false;
-			bPy = false;
-			bSemiP = false;
-			bRevo = false;
-			bM9Pistol = false;
-			bTommy = false;
-			bCust = false;
-			bMp5 = false;
-			bLr = false;
+			boolMachine = !boolMachine;
+			boolAk = false;
+			boolSAR = false;
+			boolPy = false;
+			boolSemiP = false;
+			boolRevo = false;
+			boolM9 = false;
+			boolTommy = false;
+			boolCustom = false;
+			boolMp5 = false;
+			boolLR = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD8) < 0) {
-			bRevo = !bRevo;
+			boolRevo = !boolRevo;
 			Beep(520, 600);
-			cout << "Revolver Enabled" << "\n";
-			bAk = false;
-			bSemiR = false;
-			bPy = false;
-			bSemiP = false;
-			bM9Pistol = false;
-			bTommy = false;
-			bCust = false;
-			bMp5 = false;
-			bMachine = false;
-			bLr = false;
+			boolAk = false;
+			boolSAR = false;
+			boolPy = false;
+			boolSemiP = false;
+			boolM9 = false;
+			boolTommy = false;
+			boolCustom = false;
+			boolMp5 = false;
+			boolMachine = false;
+			boolLR = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD4) < 0) {
-			bM9Pistol = !bM9Pistol;
-			Beep(555, 600);
-			cout << "M92 Enabled" << "\n";
-			bAk = false;
-			bSemiR = false;
-			bPy = false;
-			bSemiP = false;
-			bRevo = false;
-			bTommy = false;
-			bCust = false;
-			bMp5 = false;
-			bMachine = false;
-			bLr = false;
+			boolM9 = !boolM9;
+			boolAk = false;
+			boolSAR = false;
+			boolPy = false;
+			boolSemiP = false;
+			boolRevo = false;
+			boolTommy = false;
+			boolCustom = false;
+			boolMp5 = false;
+			boolMachine = false;
+			boolLR = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD7) < 0) {
-			bMp5 = !bMp5;
+			boolMp5 = !boolMp5;
 			Beep(581, 600);
-			cout << "Mp5 Enabled" << "\n";
-			bAk = false;
-			bSemiR = false;
-			bPy = false;
-			bSemiP = false;
-			bRevo = false;
-			bM9Pistol = false;
-			bTommy = false;
-			bCust = false;
-			bMachine = false;
-			bLr = false;
+			boolAk = false;
+			boolSAR = false;
+			boolPy = false;
+			boolSemiP = false;
+			boolRevo = false;
+			boolM9 = false;
+			boolTommy = false;
+			boolCustom = false;
+			boolMachine = false;
+			boolLR = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
 		if (GetAsyncKeyState(VK_NUMPAD1) < 0) {
-			bLr = !bLr;
+			boolLR = !boolLR;
 			Beep(600, 600);
-			cout << "Lr Enabled" << "\n";
-			bAk = false;
-			bSemiR = false;
-			bPy = false;
-			bSemiP = false;
-			bRevo = false;
-			bM9Pistol = false;
-			bCust = false;
-			bMp5 = false;
-			bMachine = false;
+			boolAk = false;
+			boolSAR = false;
+			boolPy = false;
+			boolSemiP = false;
+			boolRevo = false;
+			boolM9 = false;
+			boolCustom = false;
+			boolMp5 = false;
+			boolMachine = false;
+			thread(screen).detach();
 			Sleep(300);
 		}
-          this_thread::sleep_for(15ms);
+		this_thread::sleep_for(15ms);
 	}
 }
 
 int main()
 {
-	SetConsoleTitle("Rust Script");
-
-        cout << "Keybinds" << endl;
-	cout << "F2 = On/Off" << endl;
-	cout << "AK47 = Numpad 0" << endl;
-	cout << "LR = Numpad 1" << endl;
-	cout << "M249 = Numpad 2" << endl;
-	cout << "Semi Pistol P250 = Numpad 3" << endl;
-	cout << "M92 Pistol = Numpad 4" << endl;
-	cout << "Semi Automatic Rifle = Numpad 5" << endl;
-	cout << "Custom SMG / Tommy Gun = Numpad 6" << endl;
-	cout << "Mp5 = Numpad 7" << endl;
-	cout << "Revolver = Numpad 8" << endl;
-	cout << "Python = Numpad 9" << endl;
-
-	thread(recoil).detach();
-	thread(keyhandler).detach();
-	
-	
+	HWND console = GetConsoleWindow();
+	RECT ConsoleRect;
+	GetWindowRect(console, &ConsoleRect);
+	MoveWindow(console, ConsoleRect.left, ConsoleRect.top, 400, 350, TRUE);
+	SetConsoleTitle("RNR Edition 2020");
+	thread(screen).detach();
+	thread(rec).detach();
+	thread(menu).detach();
 	for (;;)
-	   this_thread::sleep_for(15ms);
+		this_thread::sleep_for(15ms);
 	return 0;
 }
